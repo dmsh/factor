@@ -39,3 +39,11 @@ FUNCTION: void SDL_Quit ( ) ;
 FUNCTION: void SDL_SetError ( c-string fmt ) ;
 FUNCTION: c-string SDL_GetError ( ) ;
 FUNCTION: void SDL_ClearError ( ) ;
+
+! SDL_active.h
+
+CONSTANT: APPMOUSEFOCUS  1
+CONSTANT: APPINPUTFOCUS  2
+CONSTANT: APPACTIVE      4
+
+FUNCTION: Uint8 SDL_GetAppState ( ) ;
