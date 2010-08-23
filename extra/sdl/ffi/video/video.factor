@@ -48,8 +48,8 @@ STRUCT: SDL_Surface
     { w              int              }
     { h              int              }
     { pitch          Uint16           }
-    { pixels         int              }
-    { offset         void*            }
+    { pixels         void*            }
+    { offset         int              }
     { hwdata         private_hwdata*  }
     { clip_rect      SDL_Rect         }
     { unused1        Uint32           }
