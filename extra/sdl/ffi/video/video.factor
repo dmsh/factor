@@ -170,7 +170,7 @@ FUNCTION: SDL_Surface* SDL_CreateRGBSurfaceFrom ( void* pixels, int width, int h
 FUNCTION: void SDL_FreeSurface ( SDL_Surface* surface ) ;
 FUNCTION: int SDL_LockSurface ( SDL_Surface* surface ) ;
 FUNCTION: void SDL_UnlockSurface ( SDL_Surface* surface ) ;
-! TODO FUNCTION: SDL_Surface* SDL_LoadBMP_RW ( SDL_RWops* src, int freesrc ) ;
+FUNCTION: SDL_Surface* SDL_LoadBMP_RW ( SDL_RWops* src, int freesrc ) ;
 ! TODO FUNCTION: int SDL_SaveBMP_RW ( SDL_Surface* surface, SDL_RWops* dst, int freedst ) ;
 FUNCTION: int SDL_SetColorKey ( SDL_Surface* surface, Uint32 flag, Uint32 key ) ;
 FUNCTION: int SDL_SetAlpha ( SDL_Surface* surface, Uint32 flag, Uint8 alpha ) ;

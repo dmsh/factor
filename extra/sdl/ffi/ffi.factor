@@ -47,3 +47,8 @@ CONSTANT: APPINPUTFOCUS  2
 CONSTANT: APPACTIVE      4
 
 FUNCTION: Uint8 SDL_GetAppState ( ) ;
+
+! SDL_rwops.h
+
+C-TYPE: SDL_RWops
+FUNCTION: SDL_RWops* SDL_RWFromFile ( c-string file, c-string mode ) ;
