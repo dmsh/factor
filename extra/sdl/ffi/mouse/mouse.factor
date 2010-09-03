@@ -33,11 +33,12 @@ CONSTANT: BUTTON_WHEELUP      4
 CONSTANT: BUTTON_WHEELDOWN    5
 CONSTANT: BUTTON_X1           6
 CONSTANT: BUTTON_X2           7
->>
 
 <PRIVATE
 : button-mask ( n -- m ) 1 swap 1 - shift ;
 PRIVATE>
+
+>>
 
 CONSTANT: BUTTON_LMASK    $[ BUTTON_LEFT   button-mask ]
 CONSTANT: BUTTON_MMASK    $[ BUTTON_MIDDLE button-mask ]
