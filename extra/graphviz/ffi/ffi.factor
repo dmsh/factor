@@ -1,0 +1,90 @@
+! Copyright (C) 2010 Dmitry Shubin.
+! See http://factorcode.org/license.txt for BSD license.
+USING: alien alien.c-types alien.libraries alien.syntax ;
+IN: graphviz.ffi
+
+
+<< "libgvc" "libgvc.so" cdecl add-library >>
+LIBRARY: libgvc
+
+C-TYPE: GVC_
+TYPEDEF: GVC_* GVC
+
+FUNCTION: GVC gvContext ( ) ;
+FUNCTION: int gvLayout ( GVC gvc, void* g, c-string engine ) ;
+FUNCTION: int gvFreeLayout ( GVC gvc, void* g ) ;
+FUNCTION: int gvFreeContext ( GVC gvc ) ;
+FUNCTION: int gvRender ( GVC gvc, void* g, c-string format, void* out ) ;
+FUNCTION: int gvRenderFilename ( GVC gvc, void* g, c-string format, c-string filename ) ;
+! int gvRenderData ( GVC gvc, void* g, c-string format, char **result, uint* length ) ;
+
+
+<< "libgraph" "libgraph.so" cdecl add-library >>
+
+LIBRARY: libgraph
+
+C-TYPE: Agraph_
+C-TYPE: Agnode_
+C-TYPE: Agedge_
+! C-TYPE: Agsym_
+
+TYPEDEF: Agraph_*  Agraph
+TYPEDEF: Agnode_*  Agnode
+TYPEDEF: Agedge_*  Agedge
+! TYPEDEF: Agsym_*   Agsym
+
+ENUM: graph-kind
+    undirected
+    directed
+    strict-undirected
+    strict-directed ;
+
+! char *agget(void *, char *);
+! char *agxget(void *, int);
+FUNCTION: int agset ( void* obj, c-string attr, c-string value ) ;
+FUNCTION: int agsafeset ( void* obj, c-string attr, c-string value, c-string default ) ;
+! int agxset(void *, int, char *);
+! int agindex(void *, char *);
+
+! void aginitlib(int, int, int);
+FUNCTION: Agraph agopen ( c-string name, graph-kind kind ) ;
+FUNCTION: Agraph agsubg ( Agraph graph, c-string id ) ;
+FUNCTION: Agraph agfindsubg ( Agraph graph, c-string id ) ;
+FUNCTION: void agclose ( Agraph graph ) ;
+! Agraph_t *agread(FILE *);
+! Agraph_t *agread_usergets(FILE *, gets_f);
+! void agreadline(int);
+! void agsetfile(char *);
+! Agraph_t *agmemread(char *);
+
+FUNCTION: Agnode agnode ( Agraph graph, c-string id ) ;
+FUNCTION: Agnode agfindnode ( Agraph graph, c-string id ) ;
+! Agnode_t *agfstnode(Agraph_t *);
+! Agnode_t *agnxtnode(Agraph_t *, Agnode_t *);
+! Agnode_t *aglstnode(Agraph_t *);
+! Agnode_t *agprvnode(Agraph_t *, Agnode_t *);
+
+FUNCTION: Agedge agedge ( Agraph graph, Agnode node, Agnode node ) ;
+FUNCTION: Agedge agfindedge ( Agraph graph, Agnode node, Agnode node ) ;
+! Agedge_t *agfstedge(Agraph_t *, Agnode_t *);
+! Agedge_t *agnxtedge(Agraph_t *, Agedge_t *, Agnode_t *);
+! Agedge_t *agfstin(Agraph_t *, Agnode_t *);
+! Agedge_t *agnxtin(Agraph_t *, Agedge_t *);
+! Agedge_t *agfstout(Agraph_t *, Agnode_t *);
+! Agedge_t *agnxtout(Agraph_t *, Agedge_t *);
+
+! Agsym_t *agattr(void *, char *, char *);
+! Agsym_t *agraphattr(Agraph_t *, char *, char *);
+! Agsym_t *agnodeattr(Agraph_t *, char *, char *);
+! Agsym_t *agedgeattr(Agraph_t *, char *, char *);
+! Agsym_t *agfindattr(void *, char *);
+! Agsym_t *agfstattr(void *);
+! Agsym_t *agnxtattr(void *, Agsym_t *);
+! Agsym_t *aglstattr(void *);
+! Agsym_t *agprvattr(void *, Agsym_t *);
+! int      agcopyattr(void *, void *);	
+
+! typedef enum { AGWARN, AGERR, AGMAX, AGPREV } agerrlevel_t;
+! agerrlevel_t agerrno;
+! void agseterr(agerrlevel_t);
+! char *aglasterr(void);
