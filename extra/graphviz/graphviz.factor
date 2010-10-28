@@ -36,3 +36,8 @@ ALIAS: add-node* agnode
 
 :: add-edge ( gr n1 n2 -- )
     gr gr n1 gr n2 [ agfindnode ] 2bi@ agedge drop ;
+
+:: set-attr ( value attr obj -- )
+    obj attr value "" agsafeset drop ;
+
+: get-attr ( attr obj -- value ) swap agget ;

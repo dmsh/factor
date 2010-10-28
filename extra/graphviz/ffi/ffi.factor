@@ -39,9 +39,9 @@ ENUM: graph-kind
     strict-undirected
     strict-directed ;
 
-! char *agget(void *, char *);
+FUNCTION: c-string agget ( void* obj, c-string attr ) ;
 ! char *agxget(void *, int);
-FUNCTION: int agset ( void* obj, c-string attr, c-string value ) ;
+! FUNCTION: int agset ( void* obj, c-string attr, c-string value ) ;
 FUNCTION: int agsafeset ( void* obj, c-string attr, c-string value, c-string default ) ;
 ! int agxset(void *, int, char *);
 ! int agindex(void *, char *);
