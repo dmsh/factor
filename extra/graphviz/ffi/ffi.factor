@@ -59,19 +59,19 @@ FUNCTION: void agclose ( Agraph graph ) ;
 
 FUNCTION: Agnode agnode ( Agraph graph, c-string id ) ;
 FUNCTION: Agnode agfindnode ( Agraph graph, c-string id ) ;
-! Agnode_t *agfstnode(Agraph_t *);
-! Agnode_t *agnxtnode(Agraph_t *, Agnode_t *);
-! Agnode_t *aglstnode(Agraph_t *);
-! Agnode_t *agprvnode(Agraph_t *, Agnode_t *);
+FUNCTION: Agnode agfstnode ( Agraph graph ) ;
+FUNCTION: Agnode agnxtnode ( Agraph graph, Agnode node ) ;
+FUNCTION: Agnode aglstnode ( Agraph graph ) ;
+FUNCTION: Agnode agprvnode ( Agraph graph, Agnode node ) ;
 
 FUNCTION: Agedge agedge ( Agraph graph, Agnode node, Agnode node ) ;
 FUNCTION: Agedge agfindedge ( Agraph graph, Agnode node, Agnode node ) ;
-! Agedge_t *agfstedge(Agraph_t *, Agnode_t *);
-! Agedge_t *agnxtedge(Agraph_t *, Agedge_t *, Agnode_t *);
-! Agedge_t *agfstin(Agraph_t *, Agnode_t *);
-! Agedge_t *agnxtin(Agraph_t *, Agedge_t *);
-! Agedge_t *agfstout(Agraph_t *, Agnode_t *);
-! Agedge_t *agnxtout(Agraph_t *, Agedge_t *);
+FUNCTION: Agedge agfstedge ( Agraph graph, Agnode node ) ;
+FUNCTION: Agedge agnxtedge ( Agraph graph, Agedge edge, Agnode node ) ;
+FUNCTION: Agedge agfstin ( Agraph graph, Agnode node ) ;
+FUNCTION: Agedge agnxtin ( Agraph graph, Agedge edge ) ;
+FUNCTION: Agedge agfstout ( Agraph graph, Agnode node ) ;
+FUNCTION: Agedge agnxtout ( Agraph graph, Agedge edge ) ;
 
 ! Agsym_t *agattr(void *, char *, char *);
 ! Agsym_t *agraphattr(Agraph_t *, char *, char *);
