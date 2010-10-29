@@ -1,6 +1,7 @@
 ! Copyright (C) 2010 Dmitry Shubin.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: alien alien.c-types alien.libraries alien.syntax ;
+USING: alien alien.c-types alien.libraries alien.syntax classes.struct
+;
 IN: graphviz.ffi
 
 
@@ -26,12 +27,17 @@ LIBRARY: libgraph
 C-TYPE: Agraph_
 C-TYPE: Agnode_
 C-TYPE: Agedge_
-! C-TYPE: Agsym_
 
 TYPEDEF: Agraph_*  Agraph
 TYPEDEF: Agnode_*  Agnode
 TYPEDEF: Agedge_*  Agedge
-! TYPEDEF: Agsym_*   Agsym
+
+STRUCT: Agsym
+    { name    c-string }
+    { value   c-string }
+    { index   int      }
+    { printed uchar    }
+    { fixed   uchar    } ;
 
 ENUM: graph-kind
     undirected
@@ -40,10 +46,11 @@ ENUM: graph-kind
     strict-directed ;
 
 FUNCTION: c-string agget ( void* obj, c-string attr ) ;
-! char *agxget(void *, int);
-! FUNCTION: int agset ( void* obj, c-string attr, c-string value ) ;
 FUNCTION: int agsafeset ( void* obj, c-string attr, c-string value, c-string default ) ;
-! int agxset(void *, int, char *);
+FUNCTION: c-string agxget ( void* obj, int index ) ;
+FUNCTION: int agxset ( void* obj, int index, c-string value ) ;
+
+! FUNCTION: int agset ( void* obj, c-string attr, c-string value ) ;
 ! int agindex(void *, char *);
 
 ! void aginitlib(int, int, int);
@@ -78,10 +85,10 @@ FUNCTION: Agedge agnxtout ( Agraph graph, Agedge edge ) ;
 ! Agsym_t *agnodeattr(Agraph_t *, char *, char *);
 ! Agsym_t *agedgeattr(Agraph_t *, char *, char *);
 ! Agsym_t *agfindattr(void *, char *);
-! Agsym_t *agfstattr(void *);
-! Agsym_t *agnxtattr(void *, Agsym_t *);
-! Agsym_t *aglstattr(void *);
-! Agsym_t *agprvattr(void *, Agsym_t *);
+FUNCTION: Agsym agfstattr ( void* item ) ;
+FUNCTION: Agsym agnxtattr ( void* item, Agsym sym ) ;
+FUNCTION: Agsym aglstattr ( void* item ) ;
+FUNCTION: Agsym agprvattr ( void* item, Agsym sym ) ;
 ! int      agcopyattr(void *, void *);	
 
 ! typedef enum { AGWARN, AGERR, AGMAX, AGPREV } agerrlevel_t;
