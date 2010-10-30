@@ -1,11 +1,16 @@
 ! Copyright (C) 2010 Dmitry Shubin.
 ! See http://factorcode.org/license.txt for BSD license.
 USING: alien alien.c-types alien.libraries alien.syntax classes.struct
-;
+combinators system ;
 IN: graphviz.ffi
 
 
-<< "libgvc" "libgvc.so" cdecl add-library >>
+<< "libgvc" {
+    { [ os macosx? ] [ "libgvc.dylib"] }
+    { [ os unix?   ] [ "libgvc.so"   ] }
+    { [ os winnt?  ] [ "gvc.dll"     ] }
+} cond cdecl add-library >>
+
 LIBRARY: libgvc
 
 C-TYPE: GVC_
@@ -20,7 +25,11 @@ FUNCTION: int gvRenderFilename ( GVC gvc, void* g, c-string format, c-string fil
 ! int gvRenderData ( GVC gvc, void* g, c-string format, char **result, uint* length ) ;
 
 
-<< "libgraph" "libgraph.so" cdecl add-library >>
+<< "libgraph" {
+    { [ os macosx? ] [ "libgraph.dylib"] }
+    { [ os unix?   ] [ "libgraph.so"   ] }
+    { [ os winnt?  ] [ "graph.dll"     ] }
+} cond cdecl add-library >>
 
 LIBRARY: libgraph
 
