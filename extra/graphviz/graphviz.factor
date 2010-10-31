@@ -15,6 +15,12 @@ DESTRUCTOR: agclose
 
 PRIVATE>
 
+
+CONSTANT: undirected        0
+CONSTANT: directed          1
+CONSTANT: strict-undirected 2
+CONSTANT: strict-directed   3
+
 : with-gvc ( quot -- )
     '[ gvContext &free-context gvc _ with-variable ]
     with-destructors ; inline
@@ -28,7 +34,7 @@ PRIVATE>
 : render-to-file ( graph format file -- )
     [ gvc get ] 3dip gvRenderFilename drop ;
 
-: with-graph ( name kind quot -- )
+: with-graph ( name type quot -- )
     [ agopen &agclose ] prepose with-destructors ; inline
 
 ALIAS: find-node agfindnode

@@ -48,12 +48,6 @@ STRUCT: Agsym
     { printed uchar    }
     { fixed   uchar    } ;
 
-ENUM: graph-kind
-    undirected
-    directed
-    strict-undirected
-    strict-directed ;
-
 FUNCTION: c-string agget ( void* obj, c-string attr ) ;
 FUNCTION: int agsafeset ( void* obj, c-string attr, c-string value, c-string default ) ;
 FUNCTION: c-string agxget ( void* obj, int index ) ;
@@ -63,7 +57,7 @@ FUNCTION: int agxset ( void* obj, int index, c-string value ) ;
 ! int agindex(void *, char *);
 
 ! void aginitlib(int, int, int);
-FUNCTION: Agraph agopen ( c-string name, graph-kind kind ) ;
+FUNCTION: Agraph agopen ( c-string name, int type ) ;
 FUNCTION: Agraph agsubg ( Agraph graph, c-string id ) ;
 FUNCTION: Agraph agfindsubg ( Agraph graph, c-string id ) ;
 FUNCTION: void agclose ( Agraph graph ) ;
