@@ -4,11 +4,16 @@ USING: alien.destructors continuations destructors fry graphviz.ffi
 kernel locals namespaces ;
 IN: graphviz
 
+<PRIVATE
+
 SYMBOL: gvc
 
 : free-context ( x -- ) gvFreeContext drop ;
 
 DESTRUCTOR: free-context
+DESTRUCTOR: agclose
+
+PRIVATE>
 
 : with-gvc ( quot -- )
     '[ gvContext &free-context gvc _ with-variable ]
@@ -22,8 +27,6 @@ DESTRUCTOR: free-context
 
 : render-to-file ( graph format file -- )
     [ gvc get ] 3dip gvRenderFilename drop ;
-
-DESTRUCTOR: agclose
 
 : with-graph ( name kind quot -- )
     [ agopen &agclose ] prepose with-destructors ; inline
