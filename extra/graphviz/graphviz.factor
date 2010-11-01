@@ -1,7 +1,7 @@
 ! Copyright (C) 2010 Dmitry Shubin.
 ! See http://factorcode.org/license.txt for BSD license.
 USING: alien.destructors continuations destructors fry graphviz.ffi
-kernel locals namespaces ;
+kernel locals math namespaces strings ;
 IN: graphviz
 
 <PRIVATE
@@ -46,7 +46,12 @@ ALIAS: add-node* agnode
 :: add-edge ( gr n1 n2 -- )
     gr gr n1 gr n2 [ agfindnode ] 2bi@ agedge drop ;
 
-:: set-attr ( value attr obj -- )
-    obj attr value "" agsafeset drop ;
 
-: get-attr ( attr obj -- value ) swap agget ;
+GENERIC: set-attr ( obj attr value -- )
+GENERIC: get-attr ( obj attr -- value )
+
+M: string set-attr "" agsafeset drop ;
+M: integer set-attr agxset drop ;
+
+M: string get-attr agget ;
+M: integer get-attr agxget ;
