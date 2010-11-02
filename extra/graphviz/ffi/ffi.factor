@@ -6,9 +6,9 @@ IN: graphviz.ffi
 
 
 << "libgvc" {
-    { [ os macosx? ] [ "libgvc.dylib"] }
-    { [ os unix?   ] [ "libgvc.so"   ] }
-    { [ os winnt?  ] [ "gvc.dll"     ] }
+    { [ os macosx? ] [ "libgvc.dylib" ] }
+    { [ os unix?   ] [ "libgvc.so"    ] }
+    { [ os winnt?  ] [ "gvc.dll"      ] }
 } cond cdecl add-library >>
 
 LIBRARY: libgvc
@@ -26,9 +26,9 @@ FUNCTION: int gvRenderFilename ( GVC gvc, void* g, c-string format, c-string fil
 
 
 << "libgraph" {
-    { [ os macosx? ] [ "libgraph.dylib"] }
-    { [ os unix?   ] [ "libgraph.so"   ] }
-    { [ os winnt?  ] [ "graph.dll"     ] }
+    { [ os macosx? ] [ "libgraph.dylib" ] }
+    { [ os unix?   ] [ "libgraph.so"    ] }
+    { [ os winnt?  ] [ "graph.dll"      ] }
 } cond cdecl add-library >>
 
 LIBRARY: libgraph
