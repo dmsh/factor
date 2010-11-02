@@ -4,6 +4,17 @@ USING: accessors alien.destructors continuations destructors fry
 graphviz.ffi kernel locals namespaces strings ;
 IN: graphviz
 
+ERROR: unknown-layout ;
+ERROR: rendering-error ;
+ERROR: graph-opening-error ;
+ERROR: bad-attr-index ;
+
+CONSTANT: undirected        0
+CONSTANT: directed          1
+CONSTANT: strict-undirected 2
+CONSTANT: strict-directed   3
+
+
 <PRIVATE
 
 SYMBOL: gvc
@@ -15,18 +26,11 @@ DESTRUCTOR: agclose
 
 : ok? ( ret quot -- ) [ 0 = ] dip unless ; inline
 
+: <graph> ( name type -- graph )
+    agopen dup f = [ graph-opening-error ] when ;
+
 PRIVATE>
 
-
-ERROR: unknown-layout ;
-ERROR: rendering-error ;
-ERROR: graph-opening-error ;
-ERROR: bad-attr-index ;
-
-CONSTANT: undirected        0
-CONSTANT: directed          1
-CONSTANT: strict-undirected 2
-CONSTANT: strict-directed   3
 
 : with-graphviz ( quot -- )
     '[ gvContext &free-context gvc _ with-variable ]
@@ -40,9 +44,6 @@ CONSTANT: strict-directed   3
 
 : render-to-file ( graph format file -- )
     [ gvc get ] 3dip gvRenderFilename [ rendering-error ] ok? ;
-
-: <graph> ( name type -- graph )
-    agopen dup f = [ graph-opening-error ] when ;
 
 : with-graph ( name type quot -- )
     [ <graph> &agclose ] prepose with-destructors ; inline
