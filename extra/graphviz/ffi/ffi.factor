@@ -37,16 +37,17 @@ C-TYPE: Agraph_
 C-TYPE: Agnode_
 C-TYPE: Agedge_
 
-TYPEDEF: Agraph_*  Agraph
-TYPEDEF: Agnode_*  Agnode
-TYPEDEF: Agedge_*  Agedge
-
-STRUCT: Agsym
+STRUCT: Agsym_
     { name    c-string }
     { value   c-string }
     { index   int      }
     { printed uchar    }
     { fixed   uchar    } ;
+
+TYPEDEF: Agraph_* Agraph
+TYPEDEF: Agnode_* Agnode
+TYPEDEF: Agedge_* Agedge
+TYPEDEF: Agsym_*  Agsym
 
 FUNCTION: c-string agget ( void* obj, c-string attr ) ;
 FUNCTION: int agsafeset ( void* obj, c-string attr, c-string value, c-string default ) ;

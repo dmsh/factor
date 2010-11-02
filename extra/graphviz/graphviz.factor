@@ -1,7 +1,7 @@
 ! Copyright (C) 2010 Dmitry Shubin.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: alien.destructors continuations destructors fry graphviz.ffi
-kernel locals math namespaces strings ;
+USING: accessors alien.destructors continuations destructors fry
+graphviz.ffi kernel locals namespaces strings ;
 IN: graphviz
 
 <PRIVATE
@@ -62,7 +62,7 @@ GENERIC: set-attr ( obj attr value -- )
 GENERIC: get-attr ( obj attr -- value )
 
 M: string set-attr "" agsafeset [ bad-attr-index ] ok? ;
-M: integer set-attr agxset [ bad-attr-index ] ok? ;
+M: Agsym_ set-attr index>> agxset [ bad-attr-index ] ok? ;
 
 M: string get-attr agget ;
-M: integer get-attr agxget ;
+M: Agsym_ get-attr index>> agxget ;

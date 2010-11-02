@@ -22,7 +22,7 @@ GENERIC: next ( iter -- iter )
 
 M: node-iter current node>> ;
 M: edge-iter current edge>> ;
-M: attr-iter current sym>> index>> ;
+M: attr-iter current sym>> ;
 
 : <node-iter> ( graph -- iter )
     dup agfstnode node-iter boa ;
