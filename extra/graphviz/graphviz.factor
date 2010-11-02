@@ -28,7 +28,7 @@ CONSTANT: directed          1
 CONSTANT: strict-undirected 2
 CONSTANT: strict-directed   3
 
-: with-gvc ( quot -- )
+: with-graphviz ( quot -- )
     '[ gvContext &free-context gvc _ with-variable ]
     with-destructors ; inline
 
