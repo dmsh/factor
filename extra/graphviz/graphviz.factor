@@ -48,6 +48,10 @@ PRIVATE>
 : with-graph ( name type quot -- )
     [ <graph> &agclose ] prepose with-destructors ; inline
 
+ALIAS: find-subgraph agfindsubg
+
+ALIAS: add-subgraph agsubg
+
 ALIAS: find-node agfindnode
 
 ALIAS: add-node* agnode
